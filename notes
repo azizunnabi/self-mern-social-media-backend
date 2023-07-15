@@ -1,0 +1,11 @@
+cd backend
+npm init -y
+npm i express
+
+npm i -D nodemon
+npm i mongoose
+create env npm i dotenv
+
+MongoDB = mongodb+srv://rehanullah748:rehan-123@rehan.j9cic6q.mongodb.net/blog
+
+https://github.com/shakilkhan12/rehan-aziz
