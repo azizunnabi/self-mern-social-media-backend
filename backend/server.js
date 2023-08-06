@@ -1,4 +1,5 @@
 const express = require("express");
+const cors= require("cors");
 const { connection } = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const postRoutes = require("./routes/postRoutes");
@@ -9,6 +10,8 @@ const app = express();
 const PORT = 5001;
 connection();
 app.use(express.json());
+
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use("/api", authRoutes);
 app.use("/api", dashboardRoutes);
 app.use("/api", postRoutes);

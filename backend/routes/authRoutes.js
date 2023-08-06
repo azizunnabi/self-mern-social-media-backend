@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/register",registerValidations, register);
 router.post("/login", loginValidations, login);
-
+router.get("/check-token, checkToken");
 router.post("/changepassword",passwordValidations, changePassword);
 
 

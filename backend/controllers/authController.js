@@ -81,11 +81,13 @@ module.exports.register = async (req, res) => {
               .json({ token, msg: "Logged in successfully", userId: user._id });
           } else {
             // Invalid password
-            return res.status(400).json({ error: "Invalid password" });
+            return res.status(400).json({
+              errors: [{ msg: "password not matched", path: "password" }],
+            });
           }
         } else {
           // User/Email not found
-          return res.status(404).json({ error: "User not found" });
+          return res.status(404).json({ errors: [{ msg: "user not found", path: "userName" }] });
         }
       } catch (error) {
         return res.status(500).json({ error: error.message });
@@ -136,8 +138,20 @@ module.exports.register = async (req, res) => {
       // Validations failed
       return res.status(400).json({ errors: errors.array() });
     }
+  }
 
 
-
-    
+  //check token
+  module.exports.checkToken = (req,res) =>{
+   
+const {token} = req.query;
+if(!token || token === undefined || token ===""){
+  return res.status(400).json({error: "token is required"})
+}
+try {
+  jwt.verify(token, process.env.SECRET_KEY);
+  return res.status(200).json({msg: "success", token : true})
+} catch (error) {
+  return res.status(401).json({error: error.message})
+}
   }
